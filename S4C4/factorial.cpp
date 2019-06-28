@@ -13,10 +13,11 @@ int main(){
 int factorial(int n){
     int i;
     int c;
+    c = n;
     i = n - 1;
     while(i > 0)
     {
-        c = n * (i);
+        c = c * (i);
         i = i - 1;
     }
     return c;
