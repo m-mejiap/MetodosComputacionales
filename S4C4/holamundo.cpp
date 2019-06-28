@@ -3,7 +3,8 @@
 #include<iostream>
 using namespace std;
 
-void maind()
+int main()
 {
-  cout<<"Hola mundo.";
+    cout<<"Hola mundo.";
+    return 0;
 }
