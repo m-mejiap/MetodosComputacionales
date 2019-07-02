@@ -3,14 +3,15 @@
 #include <iostream>
 using namespace std;
 
-int factorial(int);
+float factorial(int);
 
 int main(){
-    cout<<"El factorial del número dado es: "<<factorial(7)<<endl;
+    cout<<"El factorial de 7  es: "<<factorial(7)<<endl;
+    cout<<"El factorial de 77  es: "<<factorial(77)<<endl;
     return 0;
 }
 
-int factorial(int n){
+float factorial(int n){
     int i;
     int c;
     c = n;
