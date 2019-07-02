@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-float factorial(int);
+long long factorial(int);
 
 int main(){
     cout<<"El factorial de 7  es: "<<factorial(7)<<endl;
@@ -11,7 +11,7 @@ int main(){
     return 0;
 }
 
-float factorial(int n){
+long long factorial(int n){
     int i;
     int c;
     c = n;
