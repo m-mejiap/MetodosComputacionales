@@ -3,7 +3,7 @@
 using namespace std;
 
 double * lin_space(int a, int b, int n);
-double * funcion(float x[]);
+double * funcion(double x[], int n);
 double * derivada(int a, int b, int n);
 int a0;
 int b0;
@@ -26,20 +26,21 @@ int main(){
 double * lin_space(int a, int b, int n){
     double s = (b-a)/n;
     double lins[n];
-    double * pointer1 = lins;
+    double * pointer1 = lins;ññ
     for(int i=0; i<=n; i++){
         lins[i] = a + (i * s);
     }
     return pointer1;
 }
 
-double * funcion(float x[], int n){
+double * funcion(double x[], int n){
     double coseno[n];
     double * pointer2 = coseno;
     for(int i=0; i<=n; i++){
         coseno[i] = cos(x[i]);
         cout<<coseno[i]<<endl;
     }
+    return pointer2;
 }
 
 double * derivada(int a, int b, int n){
@@ -60,3 +61,4 @@ double * derivada(int a, int b, int n){
 //h = np.absolute(x[1]-x[0])
 //uhh =  fxh - fx[0:-1]
 //derivada = uhh/h
+
