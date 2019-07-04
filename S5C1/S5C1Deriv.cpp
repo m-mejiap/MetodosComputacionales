@@ -18,7 +18,8 @@ int main(){
     cin>>n0;
     cout<<endl;
     cout<<lin_space(a0,b0,n0)<<endl;
-    cout<<funcion(lin_space(a0,b0,n0),n0)<<endl;
+    double x0[n0] = lin_space(a0,b0,n0);
+    cout<<funcion(x0,n0)<<endl;
     cout<<derivada(a0,b0,n0)<<endl;
     return 0;
 }
@@ -26,9 +27,10 @@ int main(){
 double * lin_space(int a, int b, int n){
     double s = (b-a)/n;
     double lins[n];
-    double * pointer1 = lins;ññ
+    double * pointer1 = lins;
     for(int i=0; i<=n; i++){
         lins[i] = a + (i * s);
+        cout<<lins[i]<<endl;
     }
     return pointer1;
 }
@@ -37,8 +39,8 @@ double * funcion(double x[], int n){
     double coseno[n];
     double * pointer2 = coseno;
     for(int i=0; i<=n; i++){
-        coseno[i] = cos(x[i]);
-        cout<<coseno[i]<<endl;
+        coseno[i] = 1;
+        cout<<x[i]<<endl;
     }
     return pointer2;
 }
@@ -50,7 +52,7 @@ double * derivada(int a, int b, int n){
     return point;
 }
 
-
+//coseno[i]<<","<<
 //x = np.array([])
 //x = np.append(x, np.genfromtxt('datosfun.dat',usecols=0))
 //fx = np.array([])
@@ -61,4 +63,3 @@ double * derivada(int a, int b, int n){
 //h = np.absolute(x[1]-x[0])
 //uhh =  fxh - fx[0:-1]
 //derivada = uhh/h
-
