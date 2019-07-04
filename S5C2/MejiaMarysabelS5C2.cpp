@@ -36,4 +36,3 @@ double * solve_Euler(){
 }
 
 //Si hace makefile y script de python para graficar, envíe todo en una carpeta ApellidoNombreS5C2.zip.
-//Además debe subir sus avances aGitHub y enviar el enlace del repositorio correspondiente
