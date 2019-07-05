@@ -15,10 +15,8 @@ double * solve_Euler();
 double * solve_Runge();
 
 int main(){
-    
     cout<<solve_Euler()<<endl;
     cout<<solve_Runge()<<endl;
-    
     return 0;
 }
 
