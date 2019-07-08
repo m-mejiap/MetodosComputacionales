@@ -1,3 +1,5 @@
+#Escriba un script en python llamado ApellidoNombre_S5C3_plots.py que Grafique con matplotlib dicha posición en función del tiempo y Guarde la gráfica obtenida en ApellidoNombreResorte.pdf
+
 import numpy as np
 import matplotlib.pylab as plt
 
