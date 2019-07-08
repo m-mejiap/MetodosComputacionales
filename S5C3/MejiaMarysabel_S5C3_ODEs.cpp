@@ -16,6 +16,7 @@ int n_points = (b-a)/h;
 int solve2_Runge();
 
 int main(){
+    cout<<"Los datos se imprimen en el siguiente orden: t, x, v."<<endl;
     cout<<solve2_Runge()<<endl;
     return 0;
 }
