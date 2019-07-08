@@ -7,6 +7,8 @@ using namespace std;
 
 //a) Usando el método de Leap Frog o el de Runge Kutta de 4to orden resuleva la ecuación diferencial de segundo orden.
 
+//b) Calcule la posición de la masa en función del tiempo hasta un tiempo final de t = 5s e imprima en consola el tiempo t, la velocidad y la posición de la masa.
+
 double h = 0.01;
 double a = 0.0;
 double b = 5.0;
@@ -61,8 +63,3 @@ int solve2_Runge(){
     
     return 0;
 }
-
-//b) Calcule la posición de la masa en función del tiempo hasta un tiempo final de t = 5s e imprima en consola el tiempo t, la velocidad y la posición de la masa.
-
-//Escriba un script en python llamado ApellidoNombre_S5C3_plots.py que Grafique con matplotlib dicha posición en función del tiempo y Guarde la gráfica obtenida en ApellidoNombreResorte.pdf
-//Escriba un Makefile llamado ApellidoNombre_S5C3.mk que genere la grafica, datos y maneje las dependencias, etc...
