@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 double L = 1.0;
@@ -18,6 +19,13 @@ int main(){
 }
 
 int solve_1(){
+    double s = L/n_points;
+    double lins[n_points];
+    for(int i=0; i<=n_points; i++){
+        lins[i] = t_i + (i * s);
+        inicial[i] = exp(-((lins[i]-0.3)*(lins[i]-0.3))/0.01);
+    }
+    
     double r = c * (dt/dx);
     
     double inicial[n_points];
@@ -29,12 +37,5 @@ int solve_1(){
     finale[0] = 0;
     finale[n_points] = 0;
     
-    double s = 0.001;
-    double lins[n_points];
-    for(int i=0; i<=n_points; i++){
-        lins[i] = t_i + (i * s);
-        cout<<inicial[i]<<endl;
-    }
-
     return 0;
 }
