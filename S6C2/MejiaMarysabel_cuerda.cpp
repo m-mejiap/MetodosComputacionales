@@ -21,21 +21,26 @@ int main(){
 int solve_1(){
     double s = L/n_points;
     double lins[n_points];
-    for(int i=0; i<=n_points; i++){
+    double inicial[n_points];
+    
+    inicial[0] = 0;
+    inicial[n_points/2] = A0;
+    inicial[n_points] = 0;
+    cout<<lins[0]<<","<<inicial[0]<<endl;
+    
+    for(int i=1; i<=n_points-1; i++){
         lins[i] = t_i + (i * s);
-        inicial[i] = exp(-((lins[i]-0.3)*(lins[i]-0.3))/0.01);
+        if(i<n_points/2){
+            inicial[i] = (A0/(L/2))*(lins[i]);
+        }
+        if(i>n_points/2){
+            inicial[i] = -(A0/(L/2))*(lins[i])+(2*A0);
+        }
+        //inicial[i] = (pow(c,2)*pow(dt,2)/pow(dx,2))*(inicial[i+1]+inicial[i-1]-2*inicial[i]);
+        cout<<lins[i]<<","<<inicial[i]<<endl;
     }
     
-    double r = c * (dt/dx);
-    
-    double inicial[n_points];
-    inicial[0] = 0;
-    inicial[500] = A0;
-    inicial[n_points] = 0;
-    
-    double finale[n_points];
-    finale[0] = 0;
-    finale[n_points] = 0;
+    cout<<lins[n_points]<<","<<inicial[n_points]<<endl;
     
     return 0;
 }
