@@ -3,9 +3,9 @@
 using namespace std;
 
 double L = 1.0;
-double dt = 0.000005;
 double dx = 0.05;
 double c = 300.0;
+double dt = (dx/c)*0.25;
 double t_i = 0.0;
 double t_f = 0.1;
 double A0 = 0.01;
@@ -21,44 +21,62 @@ int main(){
 int solve_1(){
     double s = L/n_points;
     double lins[n_points];
-    double inicial[n_points];
+    lins[0] = 0;
+    lins[n_points] = L;
     
+    //Condición inicial.
+    double inicial[n_points];
     inicial[0] = 0;
     inicial[n_points/2] = A0;
     inicial[n_points] = 0;
-    lins[n_points] = L;
+    
     cout<<lins[0]<<","<<inicial[0]<<endl;
     
     for(int i=1; i<=n_points-1; i++){
-        lins[i] = t_i + (i * s);
+        lins[i] = t_i + (i * s); //Aquí se genran los valores de x.
         if(i<n_points/2){
             inicial[i] = (A0/(L/2))*(lins[i]);
         }
         if(i>n_points/2){
             inicial[i] = -(A0/(L/2))*(lins[i])+(2*A0);
         }
-   
         cout<<lins[i]<<","<<inicial[i]<<endl;
     }
     
     cout<<lins[n_points]<<","<<inicial[n_points]<<endl;
     
+    //Primer paso.
     double siguiente[n_points];
-    cout<<lins[0]<<","<<inicial[0]<<endl;
+    siguiente[0] = 0;
+    siguiente[n_points] = 0;
+    
     for(int i=1; i<=n_points-1; i++){
         siguiente[i] = (pow(c,2)*pow(dt,2)/(2*pow(dx,2)))*(inicial[i+1]+inicial[i-1]-2*inicial[i])+inicial[i];
-        cout<<lins[i]<<","<<siguiente[i]<<endl;
     }
-    cout<<lins[n_points]<<","<<inicial[n_points]<<endl;
     
-    //. dobule muysiguiete[n_points];
-    //. for(int j=0; j<=100; j++){
-    //.     for(int i=1; i<=n_points-1; i++){
-    //.         muysiguiente[i] = (pow(c,2)*pow(dt,2)/(2*pow(dx,2)))*(siguiente[i+1]+siguiente[i-1]-2*siguiente[i])+siguiente[i];
-    //.         cout<<lins[i]<<","<<muysiguiente[i]<<endl;
-    //.     }
-    //. }
-    //. cout<<lins[n_points]<<","<<inicial[n_points]<<endl;    
+    //Futuroooo.    
+    double futuro[n_points];
+    futuro[0] = 0;
+    futuro[n_points] = 0;
+    int contador = 0;
+    
+    for(int j=2; j<=300; j++){
+        for(int i=1; i<=n_points-1; i++){
+          futuro[i] = ((pow(c,2)*pow(dt,2)/pow(dx,2))*(siguiente[i+1]+siguiente[i-1]-2*siguiente[i]))-inicial[i]+(2*siguiente[i]);
+        }
+        if(contador==50||contador==100){
+            cout<<lins[0]<<","<<futuro[0]<<endl;
+            for(int i=1; i<=n_points-1; i++){
+                cout<<lins[i]<<","<<futuro[i]<<endl;
+            }
+            cout<<lins[n_points]<<","<<futuro[n_points]<<endl;
+        }
+        for(int k=1; k<=n_points-1; k++){
+            inicial[k] = siguiente[k];
+            siguiente[k] = futuro[k];
+        }
+        contador++;
+    }
     return 0;
 }
 
