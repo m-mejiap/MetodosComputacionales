@@ -26,6 +26,7 @@ int solve_1(){
     inicial[0] = 0;
     inicial[n_points/2] = A0;
     inicial[n_points] = 0;
+    lins[n_points] = L;
     cout<<lins[0]<<","<<inicial[0]<<endl;
     
     for(int i=1; i<=n_points-1; i++){
@@ -49,5 +50,15 @@ int solve_1(){
         cout<<lins[i]<<","<<siguiente[i]<<endl;
     }
     cout<<lins[n_points]<<","<<inicial[n_points]<<endl;
+    
+    //. dobule muysiguiete[n_points];
+    //. for(int j=0; j<=100; j++){
+    //.     for(int i=1; i<=n_points-1; i++){
+    //.         muysiguiente[i] = (pow(c,2)*pow(dt,2)/(2*pow(dx,2)))*(siguiente[i+1]+siguiente[i-1]-2*siguiente[i])+siguiente[i];
+    //.         cout<<lins[i]<<","<<muysiguiente[i]<<endl;
+    //.     }
+    //. }
+    //. cout<<lins[n_points]<<","<<inicial[n_points]<<endl;    
     return 0;
 }
+
