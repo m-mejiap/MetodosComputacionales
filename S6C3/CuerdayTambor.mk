@@ -1,10 +1,16 @@
 #Makefile.
-    
-plots.png : data.dat MejiaMarysabel_S5C3_plots.py
+
+plots.png : data.dat Plots_cuerdayTambor.py
 	python Plots_cuerdayTambor.py
-    
+
 data.dat : a.out
-	./a.out > data.dat
+	./a.out
     
+data2.dat : a.out
+	./a.out
+    
+data3.dat : a.out
+	./a.out
+
 a.out : MejiaMarysabel_CuerdayTambor.cpp
-	g++ MejiaMarysabel_S5C3_ODEs.cpp
+	g++ MejiaMarysabel_CuerdayTambor.cpp
