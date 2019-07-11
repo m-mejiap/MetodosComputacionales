@@ -60,11 +60,11 @@ int solve_1(){
     futuro[n_points] = 0;
     int contador = 0;
     
-    for(int j=2; j<=300; j++){
+    for(int j=2; j<=20000; j++){
         for(int i=1; i<=n_points-1; i++){
           futuro[i] = ((pow(c,2)*pow(dt,2)/pow(dx,2))*(siguiente[i+1]+siguiente[i-1]-2*siguiente[i]))-inicial[i]+(2*siguiente[i]);
         }
-        if(contador==50||contador==100){
+        if(contador==600||contador==1200||contador==1800||contador==2400||contador==3000||contador==3600){
             cout<<lins[0]<<","<<futuro[0]<<endl;
             for(int i=1; i<=n_points-1; i++){
                 cout<<lins[i]<<","<<futuro[i]<<endl;
@@ -79,4 +79,3 @@ int solve_1(){
     }
     return 0;
 }
-
