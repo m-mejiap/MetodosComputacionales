@@ -6,7 +6,7 @@ using namespace std;
 double L = 1.0;
 double dx = 0.01;
 double v = 0.0001;
-double dt = (dx/v)*0.25;
+double dt = (pow(dx,2)/v)*0.25;
 double t_i = 0.0;
 double t_f = 2500;
 int n_points = 100;
@@ -41,15 +41,28 @@ int solve_1(){
         outfile<<endl;
     }
     
- // //Primer paso.
- // double siguiente[n_points];
- // siguiente[0] = 0;
- // siguiente[n_points] = 0;
- // 
- // for(int i=1; i<=n_points-1; i++){
- //     siguiente[i] = (pow(c,2)*pow(dt,2)/(2*pow(dx,2)))*(inicial[i+1]+inicial[i-1]-2*inicial[i])+inicial[i];
- // }
- // 
+    outfile.close();
+    
+    //Primer paso.
+    outfile.open("data1.dat");
+    
+    double siguiente[n_points][n_points];
+    
+    for(int y=0; y<n_points; y++){
+        for(int x=0; x<n_points; x++){
+            if(x==0||x==1||y==0||y==1){
+                siguiente[x][y] = 50;
+            }
+            else{
+                siguiente[x][y] = ((v*dt)/pow(dx,2))*(inicial[x+1][y]+inicial[x-1][y]-4*inicial[x][y]+inicial[x][y+1]+inicial[x][y-1])+inicial[x][y];
+            }
+            outfile<<inicial[x][y]<<" ";
+        }
+        outfile<<endl;
+    }
+    
+    outfile.close();
+    
  // //Futuroooo.    
  // double futuro[n_points];
  // futuro[0] = 0;
