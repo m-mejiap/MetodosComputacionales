@@ -8,13 +8,15 @@ double dx = 0.01;
 double v = 0.0001;
 double dt = (pow(dx,2)/v)*0.25;
 double t_i = 0.0;
-double t_f = 2500;
+double t_f = 2600;
 int n_points = 100;
 
 int solve_1();
+int solve_2();
 
 int main(){
     cout<<solve_1()<<endl;
+    cout<<solve_2()<<endl;
     return 0;
 }
 
@@ -43,18 +45,71 @@ int solve_1(){
     
     outfile.close();
     
-    //Primer paso.
-    outfile.open("data1.dat");
+    //Futuroooo.  
+    double futuro[n_points][n_points];
+    int contador = 0;
     
-    double siguiente[n_points][n_points];
+    for(int t=1; t<=t_f; t++){
+        for(int y=0; y<n_points; y++){
+            for(int x=0; x<n_points; x++){
+                if(x==0||x==99||y==0||y==99){
+                    futuro[x][y] = 50;
+                }
+                else{
+                    futuro[x][y] = ((v*dt)/pow(dx,2))*(inicial[x+1][y]+inicial[x-1][y]-4*inicial[x][y]+inicial[x][y+1]+inicial[x][y-1])+inicial[x][y];
+                }
+            }
+        }
+     
+        if(contador==100){
+            outfile.open("data1.dat");
+            for(int y=0; y<n_points; y++){
+                for(int x=0; x<n_points; x++){
+                    outfile<<futuro[x][y]<<" ";
+                }
+            outfile<<endl;
+            }
+            outfile.close();
+        }
+        
+        if(contador==2500){
+            outfile.open("data2.dat");
+            for(int y=0; y<n_points; y++){
+                for(int x=0; x<n_points; x++){
+                    outfile<<futuro[x][y]<<" ";
+                }
+            outfile<<endl;
+            }
+            outfile.close();
+        }
+  
+        for(int k=0; k<n_points; k++){
+            for(int l=0; l<n_points; l++){
+                inicial[l][k] = futuro[l][k];
+            }
+        }
+        contador++;
+    }
+    return 0;
+}
+
+int solve_2(){
+    ofstream outfile;
+    outfile.open("dataa.dat");
+    
+    //Condición inicial.
+    double inicial[n_points][n_points];
     
     for(int y=0; y<n_points; y++){
         for(int x=0; x<n_points; x++){
-            if(x==0||x==1||y==0||y==1){
-                siguiente[x][y] = 50;
+            if(x<20||x>40){
+                inicial[x][y] = 50;
+            }
+            else if(y<40||y>60){
+                inicial[x][y] = 50;
             }
             else{
-                siguiente[x][y] = ((v*dt)/pow(dx,2))*(inicial[x+1][y]+inicial[x-1][y]-4*inicial[x][y]+inicial[x][y+1]+inicial[x][y-1])+inicial[x][y];
+                inicial[x][y] = 100;
             }
             outfile<<inicial[x][y]<<" ";
         }
@@ -63,30 +118,59 @@ int solve_1(){
     
     outfile.close();
     
- // //Futuroooo.    
- // double futuro[n_points];
- // futuro[0] = 0;
- // futuro[n_points] = 0;
- // int contador = 0;
- // 
- // for(int j=2; j<=20000; j++){
- //     for(int i=1; i<=n_points-1; i++){
- //       futuro[i] = ((pow(c,2)*pow(dt,2)/pow(dx,2))*(siguiente[i+1]+siguiente[i-1]-2*siguiente[i]))-inicial[i]+(2*siguiente[i]);
- //     }
- //     if(contador==600||contador==1200||contador==1800||contador==2400||contador==3000||contador==3600){
- //         outfile<<lins[0]<<","<<futuro[0]<<endl;
- //         for(int i=1; i<=n_points-1; i++){
- //             outfile<<lins[i]<<","<<futuro[i]<<endl;
- //         }
- //         outfile<<lins[n_points]<<","<<futuro[n_points]<<endl;
- //     }
- //     for(int k=1; k<=n_points-1; k++){
- //         inicial[k] = siguiente[k];
- //         siguiente[k] = futuro[k];
- //     }
- //     contador++;
- // }
- // outfile.close();
+    //Futuroooo.  
+    double futuro[n_points][n_points];
+    int contador = 0;
     
+    for(int t=1; t<=t_f; t++){
+        for(int y=0; y<n_points; y++){
+            for(int x=0; x<n_points; x++){
+                if(x!=0||x!=99||y!=0||y!=99){
+                    futuro[x][y] = ((v*dt)/pow(dx,2))*(inicial[x+1][y]+inicial[x-1][y]-4*inicial[x][y]+inicial[x][y+1]+inicial[x][y-1])+inicial[x][y];
+                }
+                if(x==0){
+                    futuro[x][y] = futuro[98][y];
+                }
+                if(x==99){
+                    futuro[x][y] = futuro[1][y];
+                }
+                if(y==0){
+                    futuro[x][y] = futuro[x][98];
+                }
+                if(y==99){
+                    futuro[x][y] = futuro[x][1];
+                }
+            }
+        }
+     
+        if(contador==100){
+            outfile.open("data11.dat");
+            for(int y=0; y<n_points; y++){
+                for(int x=0; x<n_points; x++){
+                    outfile<<futuro[x][y]<<" ";
+                }
+            outfile<<endl;
+            }
+            outfile.close();
+        }
+        
+        if(contador==2500){
+            outfile.open("data22.dat");
+            for(int y=0; y<n_points; y++){
+                for(int x=0; x<n_points; x++){
+                    outfile<<futuro[x][y]<<" ";
+                }
+            outfile<<endl;
+            }
+            outfile.close();
+        }
+  
+        for(int k=0; k<n_points; k++){
+            for(int l=0; l<n_points; l++){
+                inicial[l][k] = futuro[l][k];
+            }
+        }
+        contador++;
+    }
     return 0;
 }

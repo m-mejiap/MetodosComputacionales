@@ -8,6 +8,18 @@ data.dat : a.out
     
 data1.dat : a.out
 	./a.out
+    
+data2.dat : a.out
+	./a.out
+    
+dataa.dat : a.out
+	./a.out
+    
+data11.dat : a.out
+	./a.out
+    
+data22.dat : a.out
+	./a.out
 
 a.out : Difusion.cpp
 	g++ Difusion.cpp
