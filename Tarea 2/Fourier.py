@@ -10,7 +10,9 @@ img2 = plt.imread("cara_03_grisesMF.png")
 #2b. Haga los filtros de Fourier necesarios para realizar la imagen hibrida.
 #Transformadas de Fourier.
 timg1 = np.fft.fft2(img1)
+timg1 = np.fft.fftshift(timg1)
 timg2 = np.fft.fft2(img2)
+timg2 = np.fft.fftshift(timg2)
 
 #Grafica de los espectros de Fourier.
 plt.figure(figsize=(10,10))
@@ -32,8 +34,8 @@ columnas1 = np.shape(ctimg1)[1]
 filas2 = np.shape(ctimg2)[0]
 columnas2 = np.shape(ctimg2)[1]
 
-ctimg1[0:filas1,25:150] = 0
-ctimg1[50:200,0:columnas1] = 0
+ctimg1[0:100,0:75] = 0
+
 ctimg2[0:50,0:25] = 0
 ctimg2[0:50,150:columnas2] = 0
 ctimg2[200:filas2,0:25] = 0
@@ -56,9 +58,6 @@ ehh1 = np.fft.ifft2(ctimg1)
 ahh2 = np.fft.ifftshift(ctimg2)
 ehh2 = np.fft.ifft2(ctimg2)
 
-#plt.figure()
-#plt.imshow(np.abs(ehh), plt.cm.gray)
-
 plt.figure(figsize=(10,10))
 
 pl1 = plt.subplot(1,2,1)
@@ -70,4 +69,15 @@ pl2 = plt.subplot(1,2,2)
 pl2.imshow(np.abs(ehh2), plt.cm.gray)
 pl2.set_title("Resultado 2.")
 
-Nota: Bajas frecuencias para lejos, altas frecuencias para cerca.
+final = (ehh1 + ehh2)/2
+
+plt.figure()
+plt.imshow(np.abs(final), plt.cm.gray)
+
+#Nota: Bajas frecuencias para lejos, altas frecuencias para cerca.
+#    
+#De cerca se ve a la persona seria y de lejos se ve a la persona sonriendo.
+#
+#Cerca, seria, alta frecuencia, pasaaltas, imagen 1.
+#
+#Lejos, sonriendo, baja frecuencia, pasabajas, imagen 2.
