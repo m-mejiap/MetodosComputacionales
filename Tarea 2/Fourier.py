@@ -74,10 +74,8 @@ final = (ehh1 + ehh2)/2
 plt.figure()
 plt.imshow(np.abs(final), plt.cm.gray)
 
-#Nota: Bajas frecuencias para lejos, altas frecuencias para cerca.
-#    
-#De cerca se ve a la persona seria y de lejos se ve a la persona sonriendo.
-#
-#Cerca, seria, alta frecuencia, pasaaltas, imagen 1.
-#
-#Lejos, sonriendo, baja frecuencia, pasabajas, imagen 2.
+Nota: 
+Bajas frecuencias para lejos, altas frecuencias para cerca.
+De cerca se ve a la persona seria y de lejos se ve a la persona sonriendo.
+Cerca, seria, alta frecuencia, pasaaltas, imagen 1.
+Lejos, sonriendo, baja frecuencia, pasabajas, imagen 2.
