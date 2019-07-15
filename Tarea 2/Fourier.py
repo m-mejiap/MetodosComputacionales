@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pylab as plt
 from matplotlib.colors import LogNorm
+from scipy.ndimage import gaussian_filter
 
 #Punto 2: Transformada de Fourier: Imagenes hibridas.
 #2a. Almacene los datos de las imagenes cara_02_grisesMF.png y de cara_03_grisesMF.png.
@@ -34,19 +35,14 @@ columnas1 = np.shape(ctimg1)[1]
 filas2 = np.shape(ctimg2)[0]
 columnas2 = np.shape(ctimg2)[1]
 
-ctimg1[0:100,0:75] = 0
-
-ctimg2[0:50,0:25] = 0
-ctimg2[0:50,150:columnas2] = 0
-ctimg2[200:filas2,0:25] = 0
-ctimg2[200:filas2,150:columnas2] = 0
+ctimg1 = ctimg1 * (1 - gaussian_filter(np.abs(ctimg1),sigma=17))
+ctimg2 = ctimg2 * gaussian_filter(np.abs(ctimg2),sigma=20)
 
 plt.figure(figsize=(10,10))
 
 pl1 = plt.subplot(1,2,1)
 pl1.imshow(np.abs(ctimg1),norm=LogNorm())
 pl1.set_title("Gráfica: Filtro para la imagen 1.")
-
 
 pl2 = plt.subplot(1,2,2)
 pl2.imshow(np.abs(ctimg2),norm=LogNorm())
@@ -69,7 +65,7 @@ pl2 = plt.subplot(1,2,2)
 pl2.imshow(np.abs(ehh2), plt.cm.gray)
 pl2.set_title("Resultado 2.")
 
-final = (ehh1 + ehh2)/2
+final = ehh1 + ehh2
 
 plt.figure()
 plt.imshow(np.abs(final), plt.cm.gray)
