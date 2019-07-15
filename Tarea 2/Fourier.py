@@ -38,6 +38,7 @@ columnas2 = np.shape(ctimg2)[1]
 ctimg1 = ctimg1 * (1 - gaussian_filter(np.abs(ctimg1),sigma=17))
 ctimg2 = ctimg2 * gaussian_filter(np.abs(ctimg2),sigma=20)
 
+#Espectro filtrado de Fourier.
 plt.figure(figsize=(10,10))
 
 pl1 = plt.subplot(1,2,1)
@@ -48,23 +49,24 @@ pl2 = plt.subplot(1,2,2)
 pl2.imshow(np.abs(ctimg2),norm=LogNorm())
 pl2.set_title("Gráfica: Filtro para la imagen 2.")
 
-#Imagen final.
+#Transformadas inversas de Fourier.
 ahh1 = np.fft.ifftshift(ctimg1)
 ehh1 = np.fft.ifft2(ctimg1)
 ahh2 = np.fft.ifftshift(ctimg2)
 ehh2 = np.fft.ifft2(ctimg2)
 
+#Imagenes filtradas por separado.
 plt.figure(figsize=(10,10))
 
 pl1 = plt.subplot(1,2,1)
 pl1.imshow(np.abs(ehh1), plt.cm.gray)
 pl1.set_title("Resultado 1.")
 
-
 pl2 = plt.subplot(1,2,2)
 pl2.imshow(np.abs(ehh2), plt.cm.gray)
 pl2.set_title("Resultado 2.")
 
+#Imagen hibrida final.
 final = ehh1 + ehh2
 
 plt.figure()
