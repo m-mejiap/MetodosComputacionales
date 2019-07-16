@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pylab as plt
 from matplotlib.colors import LogNorm
-from scipy.ndimage import gaussian_filter
 
 #Punto 2: Transformada de Fourier: Imagenes hibridas.
 #2a. Almacene los datos de las imagenes cara_02_grisesMF.png y de cara_03_grisesMF.png.
@@ -45,8 +44,12 @@ columnas1 = np.shape(ctimg1)[1]
 filas2 = np.shape(ctimg2)[0]
 columnas2 = np.shape(ctimg2)[1]
 
-ctimg1 = ctimg1 * (1 - gaussian_filter(np.abs(ctimg1),sigma=6))
-ctimg2 = ctimg2 * gaussian_filter(np.abs(ctimg2),sigma=99)
+ctimg1[110:150,70:100] = 0
+
+ctimg2[0:120,0:columnas2] = 0
+ctimg2[135:filas2,0:columnas2] = 0
+ctimg2[100:150,0:75] = 0
+ctimg2[100:150,95:columnas2] = 0
 
 #Espectro filtrado de Fourier.
 plt.figure(figsize=(10,10))
@@ -79,11 +82,5 @@ pl2.set_title("Resultado 2.")
 #Imagen hibrida final.
 final = ehh1 + ehh2
 
-plt.figure()
+plt.figure(figsize=(7,7))
 plt.imshow(np.abs(final), plt.cm.gray)
-
-Nota: 
-Bajas frecuencias para lejos, altas frecuencias para cerca.
-De cerca se ve a la persona seria y de lejos se ve a la persona sonriendo.
-Cerca, seria, alta frecuencia, pasaaltas, imagen 1.
-Lejos, sonriendo, baja frecuencia, pasabajas, imagen 2.
