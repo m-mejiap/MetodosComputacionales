@@ -64,9 +64,9 @@ pl2.set_title("Gráfica: Filtro para la imagen 2.")
 
 #Transformadas inversas de Fourier.
 ahh1 = np.fft.ifftshift(ctimg1)
-ehh1 = np.fft.ifft2(ctimg1)
+ehh1 = np.fft.ifft2(ahh1)
 ahh2 = np.fft.ifftshift(ctimg2)
-ehh2 = np.fft.ifft2(ctimg2)
+ehh2 = np.fft.ifft2(ahh2)
 
 #Imagenes filtradas por separado.
 plt.figure(figsize=(10,10))
