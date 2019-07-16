@@ -8,6 +8,16 @@ from scipy.ndimage import gaussian_filter
 img1 = plt.imread("cara_02_grisesMF.png")
 img2 = plt.imread("cara_03_grisesMF.png")
 
+plt.figure(figsize=(10,10))
+
+pl1 = plt.subplot(1,2,1)
+pl1.imshow(img1, plt.cm.gray)
+pl1.set_title("Imagen original 1.")
+
+pl2 = plt.subplot(1,2,2)
+pl2.imshow(img2, plt.cm.gray)
+pl2.set_title("Imagen original 2.")
+
 #2b. Haga los filtros de Fourier necesarios para realizar la imagen hibrida.
 #Transformadas de Fourier.
 timg1 = np.fft.fft2(img1)
@@ -35,8 +45,8 @@ columnas1 = np.shape(ctimg1)[1]
 filas2 = np.shape(ctimg2)[0]
 columnas2 = np.shape(ctimg2)[1]
 
-ctimg1 = ctimg1 * (1 - gaussian_filter(np.abs(ctimg1),sigma=17))
-ctimg2 = ctimg2 * gaussian_filter(np.abs(ctimg2),sigma=20)
+ctimg1 = ctimg1 * (1 - gaussian_filter(np.abs(ctimg1),sigma=6))
+ctimg2 = ctimg2 * gaussian_filter(np.abs(ctimg2),sigma=99)
 
 #Espectro filtrado de Fourier.
 plt.figure(figsize=(10,10))
