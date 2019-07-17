@@ -117,3 +117,165 @@ b.plot(step3[2],step3[3],color="black")
 b.set_title(u"Gráfica: Caminata con sigma = 2.5.")
 
 plt.savefig("sigmaCaminata.pdf")
+
+#Repita el proceso para condiciones abiertas: si un punto se "sale" del cuadrado deja de ser considerado en la simulacion.
+newL1 = []
+newL2 = []
+for i in range(0,1000):
+    ale = np.random.random(100) * 100
+    cL1 = [L1[i]]
+    cL2 = [L2[i]]
+    for i in range(0,100):
+        numforpasosx = np.random.normal(L1[i],0.25,100)
+        numforpasosy = np.random.normal(L2[i],0.25,100)
+        if(ale[i]<25):
+            #arriba
+            cL1.append(cL1[i])
+            cL2.append(cL2[i]+numforpasosy[i])
+            if(cL2[i+1]>30.5):
+                del cL2[i+1]
+                break
+        if(ale[i]>=25 and ale[i]<=50):
+            #abajo
+            cL1.append(cL1[i])
+            cL2.append(cL2[i]-numforpasosy[i])
+            if(cL2[i+1]<0):
+                del cL2[i+1]
+                break
+        if(ale[i]>50 and ale[i]<=75):
+            #derecha
+            cL1.append(cL1[i]+numforpasosx[i])
+            cL2.append(cL2[i])
+            if(cL1[i+1]>30.5):
+                del cL1[i+1]
+                break
+        if(ale[i]>75):
+            #izquierda
+            cL1.append(cL1[i]-numforpasosx[i])
+            cL2.append(cL2[i])
+            if(cL1[i+1]<0):
+                del cL1[i+1]
+                break
+    newL1.append(cL1[len(cL1)-1])
+    newL2.append(cL2[len(cL2)-1])
+    
+plt.figure(figsize=(5,5))
+plt.scatter(newL1,newL2,color="black",marker='.')
+plt.title(u"Gráfica: Caminata con condiciones abiertas")
+plt.savefig("Caminata2.pdf")
+
+#Ejercicio casa.
+#Difusion: Una gota de crema en un cafe.
+#Condiciones iniciales:
+#Cafe: 10000 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 230.
+#Crema: 100 particulas distribuidas uniformemente dentro de un circulo de radio igual a raiz de 2.
+#Nota: si su codigo se esta demorando mucho en correr, puede usar 1000 particulas de cafe en vez de 10000.
+
+#1. Haga una grafica de las condiciones iniciales donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheIni.pdf.
+r1 = np.sqrt(230)
+r2 = np.sqrt(2)
+
+P1_1 = (r1*2) * np.random.random(10000) - r1
+P2_1 = (r1*2) * np.random.random(10000) - r1
+P1_2 = (r2*2) * np.random.random(100) - r2
+P2_2 = (r2*2) * np.random.random(100) - r2
+P1p_1 = []
+P2p_1 = []
+P1p_2 = []
+P2p_2 = []
+
+for i in range(len(P1_1)):
+    if(np.sqrt(P1_1[i]**2+P2_1[i]**2)<=r1):
+        P1p_1.append(P1_1[i])
+        P2p_1.append(P2_1[i])
+for i in range(len(P1_2)):
+    if(np.sqrt(P1_2[i]**2+P2_2[i]**2)<=r2):
+        P1p_2.append(P1_2[i])
+        P2p_2.append(P2_2[i])
+
+plt.figure(figsize=(5,5))
+plt.scatter(P1p_1,P2p_1,color="saddlebrown",marker='.')
+plt.scatter(P1p_2,P2p_2,color="white",marker='.')
+plt.title(u"Gráfica: Condiciones iniciales.")
+plt.savefig("CafeLecheIni.pdf")
+
+#2. Todas las particulas deben hacer una caminata aleatoria de 1000 pasos. Los pasos en las coordenadas x y deben seguir una distribucion gausiana de sigma 2.5. Si va a usar coordenadas polares elija un sigma apropiado.
+#3. Condiciones de frontera: Implemente unas condiciones tales que si la particulas "sale" del circulo, usted vuelva a dar el paso. Si no puede implementar solo las condiciones antes descritas, debe al menos escribir comentarios explicando que hace cada linea de codigo de las condiciones propuestas.
+newP1_1 = []
+newP2_1 = []
+newP1_2 = []
+newP2_2 = []
+for i in range(0,10000):
+    ale = np.random.random(100) * 100
+    cP1_1 = [P1_1[i]]
+    cP2_1 = [P2_1[i]]
+    for i in range(0,100):
+        numforpasosx = np.random.normal(P1_1[i],2.5,100)
+        numforpasosy = np.random.normal(P2_1[i],2.5,100)
+        if(ale[i]<25):
+            #arriba
+            cP1_1.append(cP1_1[i])
+            cP2_1.append(cP2_1[i]+numforpasosy[i])
+            if(np.sqrt(cP1_1[i+1]**2+cP2_1[i+1]**2)>r1):
+                cP2_1[i+1] = cP2_1[i]
+        if(ale[i]>=25 and ale[i]<=50):
+            #abajo
+            cP1_1.append(cP1_1[i])
+            cP2_1.append(cP2_1[i]-numforpasosy[i])
+            if(np.sqrt(cP1_1[i+1]**2+cP2_1[i+1]**2)>r1):
+                cP2_1[i+1] = cP2_1[i]
+        if(ale[i]>50 and ale[i]<=75):
+            #derecha
+            cP1_1.append(cP1_1[i]+numforpasosx[i])
+            cP2_1.append(cP2_1[i])
+            if(np.sqrt(cP1_1[i+1]**2+cP2_1[i+1]**2)>r1):
+                cP1_1[i+1] = cP1_1[i]
+        if(ale[i]>75):
+            #izquierda
+            cP1_1.append(cP1_1[i]-numforpasosx[i])
+            cP2_1.append(cP2_1[i])
+            if(np.sqrt(cP1_1[i+1]**2+cP2_1[i+1]**2)>r1):
+                cP1_1[i+1] = cP1_1[i]
+    newP1_1.append(cP1_1[100])
+    newP2_1.append(cP2_1[100])
+    
+for i in range(0,100):
+    ale = np.random.random(100) * 100
+    cP1_2 = [P1_2[i]]
+    cP2_2 = [P2_2[i]]
+    for i in range(0,100):
+        numforpasosx = np.random.normal(P1_2[i],2.5,100)
+        numforpasosy = np.random.normal(P2_2[i],2.5,100)
+        if(ale[i]<25):
+            #arriba
+            cP1_2.append(cP1_2[i])
+            cP2_2.append(cP2_2[i]+numforpasosy[i])
+            if(np.sqrt(cP1_2[i+1]**2+cP2_2[i+1]**2)>r1):
+                cP2_2[i+1] = cP2_2[i]
+        if(ale[i]>=25 and ale[i]<=50):
+            #abajo
+            cP1_2.append(cP1_2[i])
+            cP2_2.append(cP2_2[i]-numforpasosy[i])
+            if(np.sqrt(cP1_2[i+1]**2+cP2_2[i+1]**2)>r1):
+                cP2_2[i+1] = cP2_2[i]
+        if(ale[i]>50 and ale[i]<=75):
+            #derecha
+            cP1_2.append(cP1_2[i]+numforpasosx[i])
+            cP2_2.append(cP2_2[i])
+            if(np.sqrt(cP1_2[i+1]**2+cP2_2[i+1]**2)>r1):
+                cP1_2[i+1] = cP1_2[i]
+        if(ale[i]>75):
+            #izquierda
+            cP1_2.append(cP1_2[i]-numforpasosx[i])
+            cP2_2.append(cP2_2[i])
+            if(np.sqrt(cP1_2[i+1]**2+cP2_2[i+1]**2)>r1):
+                cP1_2[i+1] = cP1_2[i]
+    newP1_2.append(cP1_2[100])
+    newP2_2.append(cP2_2[100])
+    
+#4. Haga una grafica de las posiciones finales de las particulas despues de la caminata donde los dos tipos de particulas tengan distintos colores. Guarde dicha grafica sin mostrarla en CafeLecheFin.pdf.
+plt.figure(figsize=(5,5))
+plt.scatter(newP1_1,newP2_1,color="teal",marker='.')
+plt.scatter(newP1_2,newP2_2,color="darkorange",marker='.')
+plt.title(u"Gráfica: Posiciones finales.")
+plt.savefig("CafeLecheFin.pdf")
