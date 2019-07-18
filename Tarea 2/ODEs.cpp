@@ -7,9 +7,9 @@ double h = 0.01;
 double a = 0.0;
 double b = 20;
 int n_points = (b-a)/h;
-float G = 6.674e-11; //Ojo: Cambiar unidades. ((N*m^2)/kg^2)
-float m_sol = 1.989e30; //Ojo: Cambiar unidades. (kg)
-float r_ts = 149.6e6; //Ojo: Cambiar unidades. (km)
+float G = 6.674e-11*(pow(6.6846e-9,3)/(5.02785e-31*(pow(3.17098e-8,2))));
+float m_sol = 1.989e30*5.02785e-31;
+float r_ts = 1;
 
 void Euler();
 void Leap();
