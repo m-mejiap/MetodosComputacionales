@@ -91,23 +91,30 @@ c2.legend(loc=1)
 plt.subplots_adjust(wspace = 0.3)
 plt.savefig("Mome_met_dt.pdf")
 
+def energia(dats1,dats2):
+    r = np.sqrt(dats1[:,1]**2,dats2[:,1]**2)
+    v = np.sqrt(dats1[:,2]**2,dats2[:,2]**2)
+    k = (1/2) * m_earth * (v**2)
+    u = m_earth * r
+    return k + u
+
 fig3 = plt.figure(figsize=(20,5))
 a3 = fig3.add_subplot(1,3,1)
-a3.plot(datax1[:,2],datay1[:,2],color="orangered",label="dt = 0.1")
+a3.plot(datax1[:,0],energia(datax1,datay1),color="orangered",label="dt = 0.1")
 a3.set_xlabel(u"Tiempo.")
 a3.set_ylabel(u"Energía total.")
 a3.set_title(u"Rugen-Kutta: Energía total del sistema.")
 a3.legend(loc=1)
 
 b3 = fig3.add_subplot(1,3,2)
-b3.plot(datax2[:,2],datay2[:,2],color="orangered",label="dt = 0.001")
+b3.plot(datax2[:,0],energia(datax2,datay2),color="orangered",label="dt = 0.001")
 b3.set_xlabel(u"Tiempo.")
 b3.set_ylabel(u"Energía total.")
 b3.set_title(u"Rugen-Kutta: Energía total del sistema.")
 b3.legend(loc=1)
 
 c3 = fig3.add_subplot(1,3,3)
-c3.plot(datax3[:,2],datay3[:,2],color="orangered",label="dt = 0.0001")
+c3.plot(datax3[:,0],energia(datax3,datay3),color="orangered",label="dt = 0.0001")
 c3.set_xlabel(u"Tiempo.")
 c3.set_ylabel(u"Energía total.")
 c3.set_title(u"Rugen-Kutta: Energía total del sistema.")
