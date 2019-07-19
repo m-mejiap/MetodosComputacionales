@@ -86,7 +86,7 @@ pl21 = plt.subplot(2,2,4)
 pl21.imshow(np.abs(ehh2), plt.cm.gray)
 pl21.set_title("Resultado imagen 2 filtrada.")
 
-plt.figtext(0,0,u"Teniendo en cuenta que el np.shift ubica las frecuencias bajas en el centro del espectro de Fourier, se realizó para la imagen 1 \nun filtro pasa altas el cual cambió a cero la amplitud de todas aquellas frecuencias ubicadas en el centro del espectro \nPor otro lado, se hizo el proceso inverso para la imagen 2, generando un filtro pasabajas al mentener únicamente el centro del espectro.")
+plt.figtext(0,0,u"Teniendo en cuenta que el np.shift ubica las frecuencias bajas en el centro del espectro de Fourier, se realizó para la imagen 1 \nun filtro pasaaltas el cual cambió a cero la amplitud de todas aquellas frecuencias ubicadas en el centro del espectro. \nPor otro lado, se hizo el proceso inverso para la imagen 2, generando un filtro pasabajas al mentener únicamente el centro del espectro.")
 plt.savefig("ImProceso.pdf")
 
 #Imagen hibrida final.
