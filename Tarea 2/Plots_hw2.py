@@ -58,8 +58,8 @@ c1.legend(loc=1)
 plt.savefig("VxVy_met_dt.pdf")
 
 def momentum(dats1,dats2):
-    r = np.sqrt(dats1[:,1]**2,dats2[:,1]**2)
-    v = np.sqrt(dats1[:,2]**2,dats2[:,2]**2)
+    r = np.sqrt(dats1[:,1]**2+dats2[:,1]**2)
+    v = np.sqrt(dats1[:,2]**2+dats2[:,2]**2)
     L = ([])
     s = (2*np.pi)/len(r)
     for i in range(len(r)):
@@ -92,8 +92,8 @@ plt.subplots_adjust(wspace = 0.3)
 plt.savefig("Mome_met_dt.pdf")
 
 def energia(dats1,dats2):
-    r = np.sqrt(dats1[:,1]**2,dats2[:,1]**2)
-    v = np.sqrt(dats1[:,2]**2,dats2[:,2]**2)
+    r = np.sqrt(dats1[:,1]**2+dats2[:,1]**2)
+    v = np.sqrt(dats1[:,2]**2+dats2[:,2]**2)
     k = (1/2) * m_earth * (v**2)
     u = m_earth * r
     return k + u
