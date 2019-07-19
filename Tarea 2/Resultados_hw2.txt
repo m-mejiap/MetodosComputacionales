@@ -1,3 +1,7 @@
 #Fourier.
 
 Para el ejercicio de Fourier, se crearon dos filtros dependiendo de la distancia a la que se quería detallar la imagen. Teniendo en cuenta que el np.shift ubica las frecuencias bajas en el centro del espectro de Fourier, se realizó para la imagen 1 un filtro pasaaltas el cual cambió a cero la amplitud de todas aquellas frecuencias ubicadas en el centro del espectro. Por otro lado, se hizo el proceso inverso para la imagen 2, generando un filtro pasabajas al mentener únicamente el centro del espectro. Las frecuencias altas contienen la mayor cantidad de de detalles, es por ello que a la imagen que se espera ver de cerca se le aplica un filtro pasaaltas; mientras que, a la imagen que se quiere ver de lejos se le aplica un filtro pasabajas esperando que tan solo su silueta sin detalles se puedan apreciar a simple vista con mayor distancia.
+
+#ODEs.
+
+La solución de ecuaciones diferenciales con diferentes métodos presenta un cambio notable en la presición de la obtención de resulados, bien sea debido a cambio de métodos o de parámetros. En primer lugar, se puede observar que la escogencia de un dt conveniente es de vital importancia, de lo contrario la gráfica se de afectada al no tener suficientes iteraciones para brindar exactitud.
